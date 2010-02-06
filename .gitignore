@@ -1,0 +1,6 @@
+#Ignore file to match those files which we don't want to track
+tmp/*
+log/*.log
+db/*.sqlite*
+db/*.db
+public/stylesheets/.sass-cache/*
