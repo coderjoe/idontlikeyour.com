@@ -36,7 +36,7 @@ class PagesControllerTest < ActionController::TestCase
       assert_equal 'the quick brown fox', @phrase
     end
   end
-
+  
   context "GET on :about with no arguments" do
     setup do
       get_page :about
@@ -92,6 +92,40 @@ class PagesControllerTest < ActionController::TestCase
     should "ignore the given phrase and use 'ignorance about who I am!'" do
       assert_not_nil @phrase
       assert_equal 'ignorance about who I am!', @phrase
+    end
+  end
+
+  context "GET on :robot with no arguments" do
+    setup do
+      get_page :robot
+    end
+
+    should_respond_with :success
+    should_route( :get, '/robot', :action => :robot )
+
+    should "set phrase to the robot default" do
+      assert_not_nil @phrase
+      assert_equal 'BZZZZZZZZZT BLEEP BLEEP BLOOP BLOOP!', @phrase
+    end
+
+    should "have a default title" do
+      assert_select 'title', "I don't like your BZZZZZZZZZT BLEEP BLEEP BLOOP BLOOP!"
+    end
+
+    should "show the robot face" do
+      assert_equal 'robot', assigns['face_image']
+    end
+  end
+
+  context "GET on :robot with argument 'the quick brown fox'" do
+    setup do
+      get_page :robot, { :phrase => 'the quick brown fox' }
+    end
+
+    should_respond_with :success
+
+    should "set phrase to 'the quick brown fox" do
+      assert_equal 'the quick brown fox', @phrase
     end
   end
 end

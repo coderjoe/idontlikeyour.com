@@ -10,4 +10,9 @@ class PagesController < ApplicationController
   def who
     @phrase = 'ignorance about who I am!'
   end
+
+  def robot
+    @phrase = params[:phrase] || 'BZZZZZZZZZT BLEEP BLEEP BLOOP BLOOP!'
+    @face_image = 'robot'
+  end
 end

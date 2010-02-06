@@ -10,4 +10,10 @@ module ApplicationHelper
     link_to_unless_current( 'Who is that?', { :action => :who } ) + ' | ' +
     "Copywrite &copy; 2009 Joe Bauser"
   end
+
+  def face_image
+    img = 'head.gif'
+    img = @face_image + img unless @face_image.nil?
+    img
+  end
 end
