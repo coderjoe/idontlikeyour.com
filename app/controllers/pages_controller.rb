@@ -6,4 +6,8 @@ class PagesController < ApplicationController
   def about
     @phrase = 'request for information about this site!'
   end
+
+  def who
+    @phrase = 'ignorance about who I am!'
+  end
 end

@@ -66,4 +66,32 @@ class PagesControllerTest < ActionController::TestCase
     end
   end
 
+  context "GET on :who with no arguments" do
+    setup do
+      get_page :who
+    end
+
+    should_respond_with :success
+    should_route :get, '/who', :action => :who
+    
+    should "set phrase to 'ignorance about who I am!'" do
+      assert_not_nil @phrase
+      assert_equal 'ignorance about who I am!', @phrase
+    end
+
+    should "display info about Chenry" do
+      assert_select 'div.centered h1', 'Who is that?'
+    end
+  end
+
+  context "GET on :who with phrase 'the quick brown fox'" do
+    setup do
+      get_page :who, {:phrase => 'the quick brown fox'}
+    end
+
+    should "ignore the given phrase and use 'ignorance about who I am!'" do
+      assert_not_nil @phrase
+      assert_equal 'ignorance about who I am!', @phrase
+    end
+  end
 end
