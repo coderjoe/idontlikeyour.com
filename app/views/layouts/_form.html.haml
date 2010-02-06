@@ -1,0 +1,29 @@
+!!! xml
+!!!
+%html
+  %head
+    %title= get_title( @phrase )
+    =stylesheet_link_tag 'idontlikeyour'
+  %body
+    %table.centered
+      %tr
+        %td
+          =image_tag 'head.gif'
+        %td
+          %table
+            %tr
+              %td#top I don't like your
+            %tr
+              %td#textarea
+                #text= h @phrase
+            %tr
+              %td#bottom
+                =image_tag 'bubblebottom.gif'
+    .centered 
+      I don't like your
+      %br
+      - form_tag( '/', { :method => :get }  ) do
+        =text_area_tag 'phrase', @phrase, { :rows => 3, :cols => 30 }
+        =submit_tag 'Say it!'
+    %br
+    .footer= footer_links

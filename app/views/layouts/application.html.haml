@@ -1,0 +1,11 @@
+!!! xml
+!!!
+%html
+  %head
+    %title= get_title( @phrase )
+    =stylesheet_link_tag 'idontlikeyour'
+  %body
+    =render :partial => 'layouts/face_and_word_bubble'
+    =yield
+    %br
+    .footer= footer_links
