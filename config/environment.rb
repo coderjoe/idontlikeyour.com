@@ -6,5 +6,4 @@ Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
 
   config.gem 'haml'
-  config.gem 'subdomain-fu'
 end
