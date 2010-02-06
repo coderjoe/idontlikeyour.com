@@ -13,6 +13,7 @@ class PagesControllerTest < ActionController::TestCase
     end
 
     should_respond_with :success
+    should_route( :get, '/', :action => :index )
 
     should "set phrase to the default" do
       assert_not_nil @phrase
@@ -35,4 +36,34 @@ class PagesControllerTest < ActionController::TestCase
       assert_equal 'the quick brown fox', @phrase
     end
   end
+
+  context "GET on :about with no arguments" do
+    setup do
+      get_page :about
+    end
+
+    should_respond_with :success
+    should_route :get, '/about', :action => :about
+    
+    should "set phrase to 'request for information about this site!'" do
+      assert_not_nil @phrase
+      assert_equal 'request for information about this site!', @phrase
+    end
+
+    should "display about information" do
+      assert_select 'div.centered h1', 'About:'
+    end
+  end
+
+  context "GET on :about with phrase 'the quick brown fox'" do
+    setup do
+      get_page :about, {:phrase => 'the quick brown fox'}
+    end
+
+    should "ignore the given phrase and use 'request for information about this site!'" do
+      assert_not_nil @phrase
+      assert_equal 'request for information about this site!', @phrase
+    end
+  end
+
 end
